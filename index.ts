@@ -259,23 +259,22 @@ app.message(async ({ event, say, client }) => {
         maybeUpdateStatus();
       }
 
-      if (agentEvent.type === "assistant" && agentEvent.message?.content) {
-        for (const part of agentEvent.message.content) {
-          if (part.type === "text") message += part.text;
-        }
+      if (agentEvent.type === "text") {
+        message += agentEvent.text;
         maybeUpdateStatus();
       }
 
-      if (agentEvent.type === "status" && agentEvent.status === "FINISHED") {
+      if (agentEvent.type === "done") {
         completed = true;
+        const report = agentEvent.report;
         const deleteValue: DeleteButtonValue = {
           requester: user,
           target: targetUserId,
         };
         const posted = await say({
-          text: message,
+          text: report,
           blocks: [
-            { type: "markdown", text: message },
+            { type: "markdown", text: report },
             {
               type: "actions",
               elements: [

@@ -4,9 +4,9 @@ A Slack bot that explains why a user has a specific Slack ID, using an AI agent 
 
 ## Stack
 
-- Node.js
-- Cursor SDK
-- OpenRouter SDK
+- Bun
+- opencode SDK (agent, via OpenRouter)
+- OpenAI SDK (status updates, via OpenRouter)
 - Typescript
 - Slack Bolt
 - T3 Env + Zod
@@ -17,6 +17,8 @@ If you're in the [Hack Club Slack](https://slack.hackclub.com/) you can join the
 
 ## Running
 
-1. Populate env
+1. Populate env (see `.env.example`)
 2. In the Slack app settings, turn on **Interactivity & Shortcuts** (needed for the Delete button; with Socket Mode no request URL is required)
-3. `docker compose up -d`
+3. `docker compose up -d`, or locally: `bun install && bun start`
+
+The agent runs on a local `opencode serve` process started by the bot. Its custom tools live in `.opencode/tool/`.
