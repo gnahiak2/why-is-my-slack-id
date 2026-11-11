@@ -4,8 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "node --watch --env-file=.env index.ts",
-    "start": "node --env-file=.env index.ts"
+    "dev": "bun --watch index.ts",
+    "start": "bun index.ts",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -14,10 +15,16 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@cursor/sdk": "^1.0.30",
-    "@openrouter/sdk": "^1.2.27",
+    "@opencode-ai/plugin": "^1.19.5",
+    "@opencode-ai/sdk": "^1.19.5",
     "@slack/bolt": "^5.0.0",
+    "@slack/web-api": "^8.0.0",
     "@t3-oss/env-core": "^0.13.11",
+    "openai": "^7.55.0",
+    "opencode-ai": "^1.19.5",
     "zod": "^4.4.3"
-  }
+  },
+  "trustedDependencies": [
+    "opencode-ai"
+  ]
 }
