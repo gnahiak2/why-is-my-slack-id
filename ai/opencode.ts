@@ -20,11 +20,11 @@ export const opencode = await createOpencode({
   port: 0,
   timeout: 30_000,
   config: {
-    model: "openrouter/x-ai/grok-4.6",
-    small_model: "openrouter/google/gemini-3.5-flash-lite",
-    enabled_providers: ["openrouter"],
+    model: "commandcode/deepseek/deepseek-v4.1-flash",
+    small_model: "commandcode/google/gemini-3.5-flash-lite",
+    enabled_providers: ["commandcode"],
     provider: {
-      openrouter: { options: { apiKey: env.OPENROUTER_KEY } },
+      commandcode: { options: { apiKey: env.CMD_API_KEY } },
     },
     autoupdate: false,
     share: "disabled",

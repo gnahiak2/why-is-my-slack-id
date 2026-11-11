@@ -5,8 +5,8 @@ A Slack bot that explains why a user has a specific Slack ID, using an AI agent 
 ## Stack
 
 - Bun
-- opencode SDK (agent, via OpenRouter)
-- OpenAI SDK (status updates, via OpenRouter)
+- opencode SDK (agent: DeepSeek V4.1 Flash via Command Code)
+- OpenAI SDK (status updates via Command Code)
 - Typescript
 - Slack Bolt
 - T3 Env + Zod
