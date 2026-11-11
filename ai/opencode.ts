@@ -21,7 +21,7 @@ export const opencode = await createOpencode({
   timeout: 30_000,
   config: {
     model: "commandcode/deepseek/deepseek-v4.1-flash",
-    small_model: "commandcode/google/gemini-3.5-flash-lite",
+    small_model: "commandcode/deepseek/deepseek-v4.1-flash",
     enabled_providers: ["commandcode"],
     provider: {
       commandcode: { options: { apiKey: env.CMD_API_KEY } },

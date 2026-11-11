@@ -4,7 +4,7 @@ import { statusUpdateParser as statusUpdateParserPrompt } from "./prompts.ts";
 export default async function parseStatusUpdate(message: string) {
   try {
     const response = await openai.chat.completions.create({
-      model: "google/gemini-3.5-flash-lite",
+      model: "deepseek/deepseek-v4.1-flash",
       messages: [
         {
           role: "system",
