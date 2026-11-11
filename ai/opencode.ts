@@ -4,6 +4,8 @@ import { agent as agentPrompt } from "./prompts.ts";
 import { env } from "../env.ts";
 
 export const AGENT_NAME = "slackid";
+const PROVIDER_ID = "command-code";
+const MODEL_ID = "deepseek/deepseek-v4.1-flash";
 export const PROJECT_DIR = join(import.meta.dir, "..");
 
 // The SDK spawns `opencode serve` from PATH; use the binary from the
@@ -20,11 +22,29 @@ export const opencode = await createOpencode({
   port: 0,
   timeout: 30_000,
   config: {
-    model: "commandcode/deepseek/deepseek-v4.1-flash",
-    small_model: "commandcode/deepseek/deepseek-v4.1-flash",
-    enabled_providers: ["commandcode"],
+    model: `${PROVIDER_ID}/${MODEL_ID}`,
+    small_model: `${PROVIDER_ID}/${MODEL_ID}`,
+    enabled_providers: [PROVIDER_ID],
     provider: {
-      commandcode: { options: { apiKey: env.CMD_API_KEY } },
+      // Command Code as a custom OpenAI-compatible provider, so we don't
+      // depend on opencode's built-in provider catalog.
+      [PROVIDER_ID]: {
+        name: "Command Code",
+        npm: "@ai-sdk/openai-compatible",
+        options: {
+          baseURL: "https://api.commandcode.ai/provider/v1",
+          apiKey: env.CMD_API_KEY,
+        },
+        models: {
+          [MODEL_ID]: {
+            name: "DeepSeek V4.1 Flash",
+            reasoning: true,
+            tool_call: true,
+            temperature: true,
+            limit: { context: 1_000_000, output: 384_000 },
+          },
+        },
+      },
     },
     autoupdate: false,
     share: "disabled",
